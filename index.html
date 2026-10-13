@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Voice to Text is a Revenge plugin that can transcribe a voice message into text before you send it.">
+  <title>Voice to Text — Revenge Plugin</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b1020; --panel:#131b2e; --line:#29344d; --text:#eef3ff; --muted:#a9b5cf; --accent:#9ce6d2; --accent-ink:#10251f; --blue:#a8c7ff; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; background:radial-gradient(ellipse at 50% -15%, #263754 0, var(--bg) 52%); color:var(--text); font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    a { color:var(--blue); }
+    .wrap { width:min(900px, calc(100% - 32px)); margin:0 auto; }
+    header { padding:56px 0 32px; }
+    .eyebrow { color:var(--accent); font-size:.78rem; font-weight:750; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { margin:.5rem 0 .75rem; font-size:clamp(2.2rem, 7vw, 4rem); line-height:1.05; letter-spacing:-.045em; }
+    .lead { max-width:650px; color:var(--muted); font-size:1.12rem; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--line); border-radius:12px; padding:11px 16px; background:var(--panel); color:var(--text); font:inherit; font-weight:700; text-decoration:none; cursor:pointer; }
+    .button.primary { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+    .button:focus-visible, a:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+    main { padding-bottom:56px; }
+    section { scroll-margin-top:20px; border:1px solid var(--line); border-radius:18px; background:rgba(19,27,46,.88); padding:clamp(20px, 4vw, 32px); margin:18px 0; }
+    h2 { margin:0 0 12px; font-size:1.55rem; letter-spacing:-.02em; }
+    h3 { margin:20px 0 6px; font-size:1rem; }
+    p { margin:8px 0 14px; }
+    .muted { color:var(--muted); }
+    .steps { padding-left:1.3rem; }
+    .steps li { padding-left:.3rem; margin:.65rem 0; }
+    code, .url { overflow-wrap:anywhere; border:1px solid var(--line); border-radius:8px; background:#080d19; padding:3px 7px; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:.92em; }
+    .urlbox { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:12px 0; }
+    .urlbox .url { flex:1 1 300px; padding:12px; }
+    .notice { border-left:3px solid var(--accent); padding:10px 14px; color:var(--muted); background:rgba(156,230,210,.06); border-radius:0 10px 10px 0; }
+    footer { color:var(--muted); padding:0 0 36px; font-size:.9rem; }
+    @media (max-width:520px) { header { padding-top:38px; } .actions .button { width:100%; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Revenge plugin</div>
+      <h1>Voice to Text</h1>
+      <p class="lead">Turn a recorded voice message into text before sending it. When you send a voice message, the plugin asks whether you want to send the original audio or a transcript.</p>
+      <div class="actions">
+        <button class="button primary" id="copy-install" type="button">Copy install URL</button>
+        <a class="button" href="#using-speech-to-text">How to use it</a>
+        <a class="button" href="https://github.com/spwrkhsrw-oss/Speech-to-text-plugin">View source on GitHub</a>
+      </div>
+      <p class="muted" id="copy-status" aria-live="polite"></p>
+    </header>
+
+    <main>
+      <section id="about">
+        <h2>What it does</h2>
+        <p>When the plugin detects a voice message being sent, it offers three choices: send it as voice, send it as text, or cancel. If you choose text, it asks an AI transcription provider to turn the audio into written words.</p>
+        <p class="muted">The plugin needs a Gemini or OpenRouter API key configured in its settings before transcription can work.</p>
+      </section>
+
+      <section id="install">
+        <h2>Install in Revenge</h2>
+        <ol class="steps">
+          <li>Make sure GitHub Pages is enabled for this repository: open <a href="https://github.com/spwrkhsrw-oss/Speech-to-text-plugin/settings/pages">Settings → Pages</a>.</li>
+          <li>Under <strong>Build and deployment</strong>, choose <strong>Deploy from a branch</strong>, select <code>main</code> and <code>/(root)</code>, then save.</li>
+          <li>Wait for GitHub Pages to publish the site.</li>
+          <li>In Revenge, open <strong>Settings → Plugins</strong>, tap <strong>+</strong>, and paste the install URL shown below.</li>
+        </ol>
+        <div class="urlbox">
+          <div class="url" id="install-url">https://spwrkhsrw-oss.github.io/Speech-to-text-plugin/</div>
+          <button class="button" id="copy-install-2" type="button">Copy URL</button>
+        </div>
+        <p class="notice">Use the plugin URL above in Revenge. The <code>#using-speech-to-text</code> part is only a shortcut that jumps to the instructions on this webpage; it is not part of the install URL.</p>
+        <p>After publishing, you can check that the plugin manifest is online here: <a href="https://spwrkhsrw-oss.github.io/Speech-to-text-plugin/manifest.json">open manifest.json</a>.</p>
+      </section>
+
+      <section id="using-speech-to-text">
+        <h2>Using Voice to Text</h2>
+        <ol class="steps">
+          <li>Open Discord with Revenge, then go to <strong>Settings → Plugins</strong>.</li>
+          <li>Find <strong>Voice to Text</strong> and open its settings using the gear icon.</li>
+          <li>Choose either <strong>Gemini</strong> or <strong>OpenRouter</strong>, then enter the API key for that provider.</li>
+          <li>Record a voice message and send it. When the plugin asks what to do, choose <strong>Send as text</strong> to transcribe it, or <strong>Send as voice</strong> to send the original audio.</li>
+        </ol>
+        <p class="notice"><strong>Privacy note:</strong> If you choose “Send as text,” the audio is sent to the AI provider you configured so it can create the transcript. Review that provider’s privacy terms before using it.</p>
+      </section>
+
+      <section id="troubleshooting">
+        <h2>If it doesn't work</h2>
+        <p>First, open the manifest link above in your browser. If it shows JSON, GitHub Pages is serving the manifest. If it shows a 404 or an error, check the Pages settings and make sure <code>manifest.json</code>, <code>index.js</code>, and this <code>index.html</code> file are all in the repository's root folder.</p>
+        <p>If the plugin installs but transcription fails, check that the API key is correct and that your selected provider/model is available to your account.</p>
+      </section>
+    </main>
+    <footer>Voice to Text · Community plugin for Revenge · <a href="https://github.com/spwrkhsrw-oss/Speech-to-text-plugin">Source code</a></footer>
+  </div>
+  <script>
+    const installUrl = 'https://spwrkhsrw-oss.github.io/Speech-to-text-plugin/';
+    async function copyInstallUrl() {
+      const status = document.getElementById('copy-status');
+      try {
+        await navigator.clipboard.writeText(installUrl);
+        status.textContent = 'Install URL copied. Paste it into Revenge → Settings → Plugins.';
+      } catch (error) {
+        status.textContent = 'Copy this URL manually: ' + installUrl;
+      }
+    }
+    document.getElementById('copy-install').addEventListener('click', copyInstallUrl);
+    document.getElementById('copy-install-2').addEventListener('click', copyInstallUrl);
+  </script>
+</body>
+</html>
