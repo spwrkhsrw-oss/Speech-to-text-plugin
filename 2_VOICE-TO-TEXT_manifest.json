@@ -1,0 +1,7 @@
+{
+  "name": "Voice to Text",
+  "description": "After recording a voice message, asks whether to send it as voice or as transcribed text.",
+  "authors": [{ "name": "you" }],
+  "main": "index.js",
+  "vendetta": { "icon": "ic_mic_24px" }
+}
